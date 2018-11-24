@@ -7,8 +7,8 @@
     {
         public static void Main()
         {
-
-            IEngine engine = new Engine();
+            ICommandInterpreter commandInterpreter = new CommandInterpreter();
+            IEngine engine = new Engine(commandInterpreter);
             engine.Run();
         }
     }

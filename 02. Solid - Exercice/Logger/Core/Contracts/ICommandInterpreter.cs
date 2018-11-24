@@ -5,5 +5,7 @@
         void AddAppender(string[] args);
 
         void AddMessage(string[] args);
+
+        void PrintInfo();
     }
 }

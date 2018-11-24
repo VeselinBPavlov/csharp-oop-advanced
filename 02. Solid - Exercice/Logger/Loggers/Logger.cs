@@ -24,27 +24,27 @@
 
         public void Info(string dateTime, string infoMessage)
         {
-            AppendMessage(dateTime, ReportLevel.Info, infoMessage);
+            AppendMessage(dateTime, ReportLevel.INFO, infoMessage);
         }
 
         public void Warning(string dateTime, string infoMessage)
         {
-            AppendMessage(dateTime, ReportLevel.Warning, infoMessage);
+            AppendMessage(dateTime, ReportLevel.WARNING, infoMessage);
         }
 
         public void Error(string dateTime, string errorMessage)
         {
-            AppendMessage(dateTime, ReportLevel.Error, errorMessage);
+            AppendMessage(dateTime, ReportLevel.ERROR, errorMessage);
         }
 
         public void Critical(string dateTime, string criticalMessage)
         {
-            AppendMessage(dateTime, ReportLevel.Critical, criticalMessage);
+            AppendMessage(dateTime, ReportLevel.CRITICAL, criticalMessage);
         }     
 
         public void Fatal(string dateTime, string fatalMessage)
         {
-            AppendMessage(dateTime, ReportLevel.Fatal, fatalMessage);
+            AppendMessage(dateTime, ReportLevel.FATAL, fatalMessage);
         }
 
         private void AppendMessage(string dateTime, ReportLevel reportLevel, string message)

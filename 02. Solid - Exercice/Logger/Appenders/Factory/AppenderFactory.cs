@@ -17,7 +17,7 @@
             {
                 case "consoleappender": return new ConsoleAppender(layout);
                 case "fileappender": return new FileAppender(layout, new LogFile());
-                default: throw new ArgumentException("Invalid input!");
+                default: throw new ArgumentException("Invalid appender type!");
             }
         }
     }

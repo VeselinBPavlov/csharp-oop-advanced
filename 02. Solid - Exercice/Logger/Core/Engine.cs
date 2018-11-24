@@ -1,10 +1,8 @@
 ﻿namespace Logger.Core
 {
     using System;
-    using System.Collections.Generic;
 
     using Contracts;
-    using Appenders.Contracts;
 
     public class Engine : IEngine
     {
@@ -21,10 +19,19 @@
 
             for (int i = 0; i < n; i++)
             {
-                var inputArgs = Console.ReadLine().Split();
+                var inputArgs = Console.ReadLine().Split(); 
                 commandInterpreter.AddAppender(inputArgs);
             }
 
+            string command;
+            while((command = Console.ReadLine()) != "END")
+            {
+                var data = command.Split('|', StringSplitOptions.RemoveEmptyEntries);
+
+                this.commandInterpreter.AddMessage(data);
+            }
+
+            this.commandInterpreter.PrintInfo();
         }
     }
 }
