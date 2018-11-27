@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListyIterator", "ListyIterator\ListyIterator.csproj", "{AE1C7C03-2B71-4322-BA5E-97EB093E392B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE1C7C03-2B71-4322-BA5E-97EB093E392B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE1C7C03-2B71-4322-BA5E-97EB093E392B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE1C7C03-2B71-4322-BA5E-97EB093E392B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE1C7C03-2B71-4322-BA5E-97EB093E392B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1183177E-0031-4B14-9225-C184E0DF8DA9}
+	EndGlobalSection
+EndGlobal
