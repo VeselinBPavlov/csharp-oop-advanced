@@ -6,7 +6,6 @@
     {
         string Name { get; }
         int Capacity { get; }
-        IPet[] Pets { get; }
 
         bool Add(IPet pet);
         bool Release();
