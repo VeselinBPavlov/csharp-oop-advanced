@@ -7,13 +7,12 @@
     using Contracts;
 
     public class Clinic : IClinic
-    {
+    {       
         private int currentIndex;
         private int capacity;
         private int startingRoom => this.Capacity / 2;
         private int emptyRooms;
-
-        public IPet[] Pets { get; private set; }
+        private IPet[] pets;
 
         public string Name { get; private set; }
 
@@ -29,56 +28,61 @@
 
                 this.capacity = value;
             }
-        }        
+        }
 
         public Clinic(string name, int capacity)
         {
             this.Name = name;
             this.Capacity = capacity;
-            this.Pets = new IPet[this.Capacity];
+            this.pets = new IPet[this.Capacity];
             this.emptyRooms = this.Capacity;
             this.currentIndex = 0;
-        }
+        }        
 
         public bool Add(IPet pet)
         {
+            if (pet == null)
+            {
+                throw new ArgumentException("Invalid operation");
+            }
+
             if ((emptyRooms > 0) == false)
             {
                 return false;
             }
 
             var index = GiveNextEmptyRoom();
-            this.Pets[index] = pet;
+            this.pets[index] = pet;
 
             return true;
         }
 
         public bool Release()
         {
-            bool isReleased = MakeEmptyRoom(this.Pets, this.startingRoom, this.Capacity);
+            bool isReleased = MakeEmptyRoom(this.pets, this.startingRoom, this.Capacity);
 
             if (isReleased)
             {
                 return true;
             }
-            return MakeEmptyRoom(this.Pets, 0, startingRoom);
+            return MakeEmptyRoom(this.pets, 0, startingRoom);
         }
 
         public bool HasEmptyRooms() => this.emptyRooms > 0;
 
         public string Print(int room)
         {
-            return $"{this.Pets[room - 1].ToString()}";
+            return $"{this.pets[room - 1].ToString()}";
         }
 
         public string Print()
         {
             var sb = new StringBuilder();
-            for (int i = 0; i < this.Pets.Length; i++)
+            for (int i = 0; i < this.pets.Length; i++)
             {
-                if (this.Pets[i] != null)
+                if (this.pets[i] != null)
                 {
-                    sb.AppendLine(this.Pets[i].ToString());                    
+                    sb.AppendLine(this.pets[i].ToString());                    
                 }
                 else
                 {
@@ -91,7 +95,7 @@
 
         public IEnumerator<IPet> GetEnumerator()
         {
-            foreach (var pet in this.Pets)
+            foreach (var pet in this.pets)
             {
                 yield return pet;
             }

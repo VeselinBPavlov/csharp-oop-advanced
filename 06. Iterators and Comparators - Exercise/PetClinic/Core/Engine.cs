@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
 
     public class Engine
@@ -20,39 +21,18 @@
             for (int i = 0; i < commandsCount; i++)
             {
                 var data = Console.ReadLine().Split();
-
+                var args = data.Skip(1).ToArray();
                 var command = data[0];
+
                 try
                 {
                     switch (command)
                     {
-                        case "Create":
-                            {
-                                if (data[1] == "Pet")
-                                {
-                                    clinicController.CreatePet(data[2], int.Parse(data[3]), data[4]);
-                                }
-                                else
-                                {
-                                    clinicController.CreateClinic(data[2], int.Parse(data[3]));
-                                }
-                            }
-                            break;
-                        case "Add": Console.WriteLine(clinicController.Add(data[1], data[2])); break;
-                        case "Release": Console.WriteLine(clinicController.Release(data[1])); break;
-                        case "HasEmptyRooms": Console.WriteLine(clinicController.HasEmptyRooms(data[1])); break;
-                        case "Print":
-                            {
-                                if (data.Length == 3)
-                                {
-                                    Console.WriteLine(clinicController.Print(data[1], int.Parse(data[2])));
-                                }
-                                else
-                                {
-                                    Console.WriteLine(clinicController.Print(data[1]));
-                                }
-                            }
-                            break;
+                        case "Create": clinicController.Create(args); break;
+                        case "Add": Console.WriteLine(clinicController.Add(args)); break;
+                        case "Release": Console.WriteLine(clinicController.Release(args)); break;
+                        case "HasEmptyRooms": Console.WriteLine(clinicController.HasEmptyRooms(args)); break;
+                        case "Print": Console.WriteLine(clinicController.Print(args)); break;
                         default: break;
                     }
                 }

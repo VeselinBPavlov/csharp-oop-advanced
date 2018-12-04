@@ -1,5 +1,6 @@
 ﻿namespace PetClinic.Core
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -21,47 +22,63 @@
             this.petFactory = new PetFactory();
         }
 
-        public void CreatePet(string name, int age, string kind)
+        public void Create(string[] args)
         {
-            IPet pet = petFactory.CreatePet(name, age, kind);
-            this.pets.Add(pet);
+            var name = args[1];
+            var ageOrCapacity = int.Parse(args[2]);
+
+            if (args.Length == 4)
+            {
+                var kind = args[3];
+                IPet pet = petFactory.CreatePet(name, ageOrCapacity, kind);
+                this.pets.Add(pet);                
+            }
+            else
+            {
+                IClinic clinic = clinicFactory.CreateClinic(name, ageOrCapacity);
+                this.clinics.Add(clinic);
+            }          
         }
 
-        public void CreateClinic(string name, int capacity)
+        public bool Release(string[] args)
         {
-            IClinic clinic = clinicFactory.CreateClinic(name, capacity);
-            this.clinics.Add(clinic);
-        }
-
-        public bool Release(string clinicName)
-        {
+            var clinicName = args[0];
             var clinic = this.clinics.FirstOrDefault(c => c.Name == clinicName);
+
             return clinic.Release();
         }
 
-        public bool Add(string petName, string clinicName)
+        public bool Add(string[] args)
         {
+            var petName = args[0];
+            var clinicName = args[1];
             var pet = this.pets.FirstOrDefault(c => c.Name == petName);
             var clinic = this.clinics.FirstOrDefault(c => c.Name == clinicName);
 
             return clinic.Add(pet);
         }
 
-        public string Print(string clinicName)
+        public string Print(string[] args)
         {
+            var clinicName = args[0];
             var clinic = this.clinics.FirstOrDefault(c => c.Name == clinicName);
-            return clinic.Print();
+            
+            if (args.Length == 2)
+            {
+                var index = int.Parse(args[1]);
+                return clinic.Print(index);
+            }
+            else
+            {
+                return clinic.Print();
+            }            
         }
 
-        public string Print(string clinicName, int room)
+        public bool HasEmptyRooms(string[] args)
         {
+            var clinicName = args[0];
             var clinic = this.clinics.FirstOrDefault(c => c.Name == clinicName);
-            return clinic.Print(room);
-        }
 
-        public bool HasEmptyRooms(string clinicName)
-        {
-            var clinic = this.clinics.FirstOrDefault(c => c.Name == clinicName);
             return clinic.HasEmptyRooms();
         }
     }
