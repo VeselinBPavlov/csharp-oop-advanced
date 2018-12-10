@@ -1,0 +1,7 @@
+RegisterSet {name} {type}
+SignUpPerformer {name} {age} {instrument1} {instrument2} {instrumentN}
+RegisterSong {name} {mm:ss}
+AddSongToSet {songName} {setName}
+AddPerformerToSet {performerName} {setName}
+RepairInstruments
+LetsRock
