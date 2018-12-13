@@ -1,8 +1,8 @@
 ﻿namespace FestivalManager.Core.IO
 {
+    using FestivalManager.Core.IO.Contracts;
     using System;
-
-    using Contracts;
+    
 
     public class ConsoleReader : IReader
     {

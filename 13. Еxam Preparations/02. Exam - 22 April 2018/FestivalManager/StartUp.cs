@@ -4,32 +4,30 @@
     using Core.Controllers;
     using Core.Controllers.Contracts;
     using Entities;
-    using Core.Contracts;
-    using Core.IO;
-    using Core.IO.Contracts;
-    using Entities.Contracts;
-    using Entities.Factories;
+    using FestivalManager.Core.Contracts;
+    using FestivalManager.Core.IO;
+    using FestivalManager.Core.IO.Contracts;
+    using FestivalManager.Entities.Contracts;
+    using FestivalManager.Entities.Factories;
+    using FestivalManager.Entities.Factories.Contracts;
 
-    public static class StartUp
-    {
-        public static void Main(string[] args)
-        {
+    public class StartUp
+	{
+		public static void Main()
+		{
             IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter();
-            IStage stage = new Stage();
-            IFestivalController festivalController = new FestivalController(
-                stage,
-                new SetFactory(),
-                new InstrumentFactory());
-            ISetController setController = new SetController(stage);
 
-            IEngine engine = new Engine(
-                reader,
-                writer,
-                festivalController,
-                setController);
+			IStage stage = new Stage();
+            ISetFactory setFactory = new SetFactory();
+            IInstrumentFactory instrumentFactory = new InstrumentFactory();
 
-            engine.Run();
-        }
-    }
+            IFestivalController festivalController = new FestivalController(stage, setFactory, instrumentFactory);
+			ISetController setController = new SetController(stage);
+
+			IEngine engine = new Engine(reader, writer, festivalController, setController);
+
+			engine.Run();
+		}
+	}
 }

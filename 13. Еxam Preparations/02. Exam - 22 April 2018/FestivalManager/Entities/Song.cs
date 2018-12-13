@@ -5,19 +5,18 @@
 
 	public class Song : ISong
     {
-		public Song(string name, TimeSpan duration)
+        public string Name { get; private set; }
+        public TimeSpan Duration { get; private set; }
+
+        public Song(string name, TimeSpan duration)
 		{
 			this.Name = name;
 			this.Duration = duration;
 		}
 
-		public string Name { get; private set; }
-
-	    public TimeSpan Duration { get; private set; }
-
 	    public override string ToString()
 	    {
-		    return $"{this.Name} ({this.Duration.ToString("mm\\:ss")})";
+		    return $"{this.Name} ({this.Duration:mm\\:ss})";
 	    }
     }
 }

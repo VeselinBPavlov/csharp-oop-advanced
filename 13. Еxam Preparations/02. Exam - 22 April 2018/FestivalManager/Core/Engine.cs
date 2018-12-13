@@ -5,86 +5,75 @@
     using IO.Contracts;
     using System;
     using System.Linq;
+    using System.Text;
 
     public class Engine : IEngine
     {
         private IReader reader;
         private IWriter writer;
-        private IFestivalController festivalController;
-        private ISetController setController;
+        private IFestivalController festivalCоntroller;
+        private ISetController setCоntroller;
 
-        public Engine(
-            IReader reader,
-            IWriter writer,
-            IFestivalController festivalController,
-            ISetController setController)
+        public Engine(IReader reader, IWriter writer, IFestivalController festivalCоntroller, ISetController setCоntroller)
         {
             this.reader = reader;
             this.writer = writer;
-            this.festivalController = festivalController;
-            this.setController = setController;
+            this.festivalCоntroller = festivalCоntroller;
+            this.setCоntroller = setCоntroller;
         }
 
         public void Run()
         {
-            while (true)
+            string command;
+            var sb = new StringBuilder();
+            while ((command = reader.ReadLine()) != "END")
             {
-                var input = this.reader.ReadLine();
-
-                if (input == "END")
-                {
-                    break;
-                }
-
                 string result;
-
                 try
                 {
-                    result = this.DoCommand(input);
+                    result = this.ProcessCommand(command);
+                    sb.AppendLine(result);
                 }
                 catch (Exception ex)
                 {
                     if (ex.InnerException != null)
                     {
-                        result = "ERROR: " + ex.InnerException.Message;
+                        sb.AppendLine("ERROR: " + ex.InnerException.Message);
                     }
                     else
                     {
-                        result = "ERROR: " + ex.Message;
+                        sb.AppendLine("ERROR: " + ex.Message);
                     }
                 }
-
-                this.writer.WriteLine(result.Trim());
             }
 
-            string report = this.festivalController.ProduceReport();
+            var report = this.festivalCоntroller.ProduceReport();
 
-            this.writer.WriteLine("Results:");
-            this.writer.WriteLine(report.Trim());
+            sb.AppendLine("Results:");
+            sb.AppendLine(report.Trim());
+            this.writer.WriteLine(sb.ToString().TrimEnd());
         }
 
-        private string DoCommand(string input)
+        public string ProcessCommand(string input)
         {
-            string[] tokens = input.Split();
+            var data = input.Split();
 
-            string command = tokens[0];
+            var command = data.First();
+            var args = data.Skip(1).ToArray();
 
             string result;
             if (command == "LetsRock")
             {
-                result = this.setController.PerformSets();
+                result = this.setCоntroller.PerformSets();              
             }
             else
             {
-                string[] commandParams = tokens
-                    .Skip(1)
-                    .ToArray();
+                var festivalcontrolfunction = this.festivalCоntroller
+                .GetType()
+                .GetMethods()
+                .FirstOrDefault(x => x.Name == command);
 
-                var festivalcontrolfunction = this.festivalController.GetType()
-                    .GetMethods()
-                    .FirstOrDefault(m => m.Name == command);
-
-                result = (string)festivalcontrolfunction.Invoke(this.festivalController, new object[] { commandParams });
+                result = (string)festivalcontrolfunction.Invoke(this.festivalCоntroller, new object[] { args });                
             }
 
             return result;

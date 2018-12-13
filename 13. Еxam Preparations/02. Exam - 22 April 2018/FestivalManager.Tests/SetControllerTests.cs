@@ -1,14 +1,25 @@
+// Use this file for your unit tests.
+// When you are ready to submit, REMOVE all using statements to your project (entities/controllers/etc)
+
+using FestivalManager.Core.Controllers;
+using FestivalManager.Core.Controllers.Contracts;
+using FestivalManager.Entities;
+using FestivalManager.Entities.Contracts;
+using FestivalManager.Entities.Instruments;
+using FestivalManager.Entities.Sets;
+
+
 namespace FestivalManager.Tests
 {
     using NUnit.Framework;
     using System;
 
     [TestFixture]
-    public class SetControllerTests
+	public class SetControllerTests
     {
-        [Test]
-        public void Test()
-        {
+		[Test]
+	    public void SetControllerDidNotPerform()
+	    {
             IStage stage = new Stage();
             ISetController setController = new SetController(stage);
 
@@ -29,7 +40,7 @@ namespace FestivalManager.Tests
         }
 
         [Test]
-        public void Test2()
+        public void SetControllerSetSuccessfull()
         {
             IStage stage = new Stage();
 
@@ -49,7 +60,7 @@ namespace FestivalManager.Tests
         }
 
         [Test]
-        public void Test3()
+        public void SetControllerTestWearOfInstruments()
         {
             IStage stage = new Stage();
 

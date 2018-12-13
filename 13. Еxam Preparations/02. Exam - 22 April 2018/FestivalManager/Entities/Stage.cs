@@ -1,15 +1,18 @@
 ﻿namespace FestivalManager.Entities
 {
-    using System.Collections.Generic;
+	using System.Collections.Generic;
     using System.Linq;
-
     using Contracts;
 
-    public class Stage : IStage
-    {
-        private readonly List<ISet> sets;
-        private readonly List<ISong> songs;
-        private readonly List<IPerformer> performers;
+	public class Stage : IStage
+	{
+		private readonly List<ISet> sets;
+		private readonly List<ISong> songs;
+		private readonly List<IPerformer> performers;
+
+        public IReadOnlyCollection<ISet> Sets => this.sets.AsReadOnly();
+        public IReadOnlyCollection<ISong> Songs => this.songs.AsReadOnly();
+        public IReadOnlyCollection<IPerformer> Performers => this.performers.AsReadOnly();
 
         public Stage()
         {
@@ -18,55 +21,22 @@
             this.performers = new List<IPerformer>();
         }
 
-        public IReadOnlyCollection<ISet> Sets => this.sets.AsReadOnly();
+        public void AddPerformer(IPerformer performer) => this.performers.Add(performer);
 
-        public IReadOnlyCollection<ISong> Songs => this.songs.AsReadOnly();
+        public void AddSet(ISet set) => this.sets.Add(set);
 
-        public IReadOnlyCollection<IPerformer> Performers => this.performers.AsReadOnly();
+        public void AddSong(ISong song) => this.songs.Add(song);
 
-        public IPerformer GetPerformer(string name)
-        {
-            return this.Performers.FirstOrDefault(p => p.Name == name);
-        }
+        public IPerformer GetPerformer(string name) => performers.FirstOrDefault(p => p.Name == name);
 
-        public ISong GetSong(string name)
-        {
-            return this.Songs.FirstOrDefault(s => s.Name == name);
-        }
+        public ISet GetSet(string name) => sets.FirstOrDefault(s => s.Name == name);
 
-        public ISet GetSet(string name)
-        {
-            return this.Sets.FirstOrDefault(s => s.Name == name);
-        }
+        public ISong GetSong(string name) => songs.FirstOrDefault(s => s.Name == name);
 
-        public void AddPerformer(IPerformer performer)
-        {
-            this.performers.Add(performer);
-        }
+        public bool HasPerformer(string name) => performers.Any(p => p.Name == name);
 
-        public void AddSong(ISong song)
-        {
-            this.songs.Add(song);
-        }
+        public bool HasSet(string name) => sets.Any(s => s.Name == name);
 
-        public void AddSet(ISet set)
-        {
-            this.sets.Add(set);
-        }
-
-        public bool HasPerformer(string name)
-        {
-            return this.Performers.Any(p => p.Name == name);
-        }
-
-        public bool HasSong(string name)
-        {
-            return this.Songs.Any(s => s.Name == name);
-        }
-
-        public bool HasSet(string name)
-        {
-            return this.Sets.Any(s => s.Name == name);
-        }
+        public bool HasSong(string name) => songs.Any(s => s.Name == name);
     }
 }
