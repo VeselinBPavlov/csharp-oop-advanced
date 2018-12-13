@@ -86,26 +86,11 @@
 			foreach (var passenger in plane.Passengers)
 			{
 				var luggage = passenger.Bags;
-
-				// 28-04-2018 18:00
-				// Original implementation, which ended up in the skeleton.
-				// All tests in Judge passed, regardless of which method was used.
-				/*
-				 for (var bagIndex = 0; bagIndex < luggage.Count; bagIndex++)
+				for (var bagIndex = 0; bagIndex < luggage.Count; bagIndex++)
 				{
 					var luggageBag = luggage[bagIndex];
 
 					passenger.Bags.RemoveAt(bagIndex);
-
-					plane.LoadBag(luggageBag);
-				}
-				*/
-				
-				while (luggage.Any())
-				{
-					var luggageBag = luggage[0];
-
-					passenger.Bags.RemoveAt(0);
 
 					plane.LoadBag(luggageBag);
 				}

@@ -4,11 +4,11 @@
 
 	public abstract class Item : IItem
 	{
-		protected Item(int value)
+        public int Value { get; set; }
+
+        protected Item(int value)
 		{
 			this.Value = value;
-		}
-
-		public int Value { get; set; }
+		}		
 	}
 }

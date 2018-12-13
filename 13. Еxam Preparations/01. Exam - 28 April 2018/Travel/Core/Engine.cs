@@ -1,8 +1,8 @@
 ﻿namespace Travel.Core
 {
-	using System;
 	using System.Linq;
-	using Contracts;
+    using System.Text;
+    using Contracts;
 	using Controllers.Contracts;
 	using IO.Contracts;
 
@@ -25,26 +25,24 @@
 
 		public void Run()
 		{
-			while (true)
+            string input;
+            var sb = new StringBuilder();
+            while ((input = this.reader.ReadLine()) != "END")
 			{
-				var input = this.reader.ReadLine();
-
-				if (input == "END")
-				{
-					break;
-				}
-
-				try
+                
+                try
 				{
 					var result = this.ProcessCommand(input);
-					this.writer.WriteLine(result);
+					sb.AppendLine(result);
 				}
-				catch (InvalidOperationException ex)
+				catch (System.InvalidOperationException ex)
 				{
-					this.writer.WriteLine("ERROR: " + ex.Message);
-				}
+					sb.AppendLine("ERROR: " + ex.Message);
+				}                
 			}
-		}
+
+            this.writer.WriteLine(sb.ToString().TrimEnd());
+        }
 
 		public string ProcessCommand(string input)
 		{
@@ -93,7 +91,7 @@
 					return output;
 				}
 				default:
-					throw new InvalidOperationException("Invalid command!");
+					throw new System.InvalidOperationException("Invalid command!");
 			}
 		}
 	}

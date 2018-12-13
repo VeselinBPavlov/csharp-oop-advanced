@@ -8,16 +8,15 @@
 
 	public class Bag : IBag
 	{
-		private readonly List<IItem> items;
+		private List<IItem> items;
 
-		public Bag(IPassenger owner, IEnumerable<IItem> items)
+        public IPassenger Owner { get; }
+        public IReadOnlyCollection<IItem> Items => this.items.AsReadOnly();
+
+        public Bag(IPassenger owner, IEnumerable<IItem> items)
 		{
 			this.Owner = owner;
 			this.items = items.ToList();
 		}
-
-		public IPassenger Owner { get; }
-
-		public IReadOnlyCollection<IItem> Items => this.items.AsReadOnly();
 	}
 }
