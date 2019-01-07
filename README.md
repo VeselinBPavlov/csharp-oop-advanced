@@ -9,7 +9,7 @@
 06. Object Communication and Events
 
 ## Status: 
-Uncompleted
+Completed
 
 ## Certificate: 
-none
+<img src="certificate.jpeg"/>
