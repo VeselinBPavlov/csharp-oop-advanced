@@ -1,9 +1,11 @@
 ﻿namespace TheTankGame.Tests
 {
-    using NUnit.Framework;
-    using TheTankGame.Entities.Miscellaneous;
+	using TheTankGame.Entities.Miscellaneous;
     using TheTankGame.Entities.Parts;
     using TheTankGame.Entities.Vehicles;
+	
+    using NUnit.Framework;
+
 
     [TestFixture]
     public class BaseVehicleTests
